@@ -1,5 +1,6 @@
 package com.example.preparation
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -38,7 +39,19 @@ class MainActivity : AppCompatActivity() {
         mainBtn.setOnClickListener{
             getAllPosts()
             mainBtn.text = "Update"
+
+
+/*
+            val intent = Intent(it.context, PostDetailsActivity::class.java)
+            intent.putExtra("id", id_txt.text)
+            intent.putExtra("postId", postId_txt.text)
+            intent.putExtra("title", title_txt.text)
+            intent.putExtra("body", body_txt.text)
+
+            startActivity(intent)
+*/
         }
+
 
     }
 
@@ -56,49 +69,4 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
-
-
-
-/*
-    fun run(url: String) {
-        progress.visibility = View.VISIBLE
-        val request = Request.Builder()
-            .url(url)
-            .build()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                progress.visibility = View.GONE
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                var str_response = response.body()!!.string()
-                //creating json object
-                val json_contact:JSONObject = JSONObject(str_response)
-                //creating json array
-                var jsonarray_info:JSONArray = json_contact.getJSONArray("info")
-
-                var size:Int = jsonarray_info.length()
-                arrayList_details = ArrayList();
-                for (i in 0.. size-1) {
-                    var json_objectdetail:JSONObject=jsonarray_info.getJSONObject(i)
-                    var model : Post = Post(json_objectdetail.getInt("userId"),
-                        json_objectdetail.getInt("id"),
-                        json_objectdetail.getString("title"),
-                        json_objectdetail.getString("body")
-                    )
-                    arrayList_details.add(model)
-                }
-
-                runOnUiThread {
-                    //stuff that updates ui
-                    arrayList_details.forEach {
-                        addFragment(it)
-                    }
-                }
-                progress.visibility = View.GONE
-            }
-        })
-    }*/
 }

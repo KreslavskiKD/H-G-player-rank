@@ -1,12 +1,16 @@
 package com.example.preparation
 
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+
 
 class PostAdapter(private val context: Context, private val postList: MutableList<Post>):
     RecyclerView.Adapter<PostAdapter.MyViewHolder>() {
@@ -20,6 +24,13 @@ class PostAdapter(private val context: Context, private val postList: MutableLis
         fun bind(listItem: Post) {
             itemView.setOnClickListener {
                 Toast.makeText(it.context, "pressed post with id = ${itemView.findViewById<TextView>(R.id.postId).text}", Toast.LENGTH_SHORT).show()
+                Log.w("PostAdapter", "bind")
+                val intent = Intent(it.context, PostDetailsActivity::class.java)
+                intent.putExtra("id", id_txt.text)
+                intent.putExtra("postId", postId_txt.text)
+                intent.putExtra("title", title_txt.text)
+                intent.putExtra("body", body_txt.text)
+                it.context.startActivity(intent)
             }
         }
     }
@@ -42,3 +53,4 @@ class PostAdapter(private val context: Context, private val postList: MutableLis
     }
 
 }
+
